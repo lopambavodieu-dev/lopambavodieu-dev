@@ -12,16 +12,23 @@
     <header>
         <nav>
             <div class="logo">Lopamba<span>Vodieu</span></div>
-            <ul>
+            <!-- Bouton Hamburger pour mobile -->
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links">
                 <li><a href="#home">Accueil</a></li>
                 <li><a href="#about">À propos</a></li>
-                <li><a href="#services">Compétences</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Réalisations</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Section Accueil avec l'ordinateur en filigrane très visible -->
+    <!-- Section Accueil avec l'ordinateur en filigrane -->
     <section id="home" class="hero">
         <div class="hero-bg-animation">
             <div class="laptop-frame">
@@ -31,17 +38,20 @@
             </div>
         </div>
         
-        <div class="hero-content">
+        <div class="hero-content reveal">
             <h1>Lopamba <span class="highlight">Vodieu Vodieu</span></h1>
-            <p>Génie Logiciel | Multidisciplinaire | Créatif</p>
-            <a href="#about" class="btn">Découvrir mon profil</a>
+            <p>Développeur Web | Designer Graphique | Community Manager | Marketing Digital</p>
+            <div class="hero-btns">
+                <a href="#about" class="btn">Découvrir mon profil</a>
+                <a href="#" class="btn btn-secondary" download><i class="fa-solid fa-file-pdf"></i> Télécharger mon CV</a>
+                <a href="https://github.com" target="_blank" class="btn btn-outline"><i class="fa-brands fa-github"></i> Voir mon GitHub</a>
+            </div>
         </div>
     </section>
 
-    <!-- Section À Propos (Bio + Soft Skills + Ta Photo à droite) -->
+    <!-- Section À Propos -->
     <section id="about" class="about-section">
-        <div class="about-container">
-            
+        <div class="about-container reveal">
             <!-- Colonne Gauche : Biographie & Soft Skills -->
             <div class="about-left">
                 <div class="bio-box">
@@ -59,14 +69,14 @@
                         <li><i class="fa-solid fa-clock"></i> Gestion du temps</li>
                         <li><i class="fa-solid fa-crown"></i> Leadership</li>
                         <li><i class="fa-solid fa-lightbulb"></i> Créativité</li>
-                        <li><i class="fa-solid fa-arrow-down-short-wide"></i> Sens de l’organisation</li>
+                        <li><i class="fa-solid fa-arrow-down-short-wide"></i> Organisation</li>
                         <li><i class="fa-solid fa-sliders"></i> Adaptabilité</li>
                         <li><i class="fa-solid fa-puzzle-piece"></i> Résolution des problèmes</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Colonne Droite : Ta Photo de profil sécurisée -->
+            <!-- Colonne Droite : Photo de profil -->
             <div class="about-right">
                 <div class="profile-card">
                     <img src="lopamba.png" alt="Lopamba Vodieu Vodieu" class="profile-img">
@@ -75,68 +85,177 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- Section Compétences Métiers -->
-    <section id="services">
-        <h2 class="section-title">Mes Compétences & Expertises</h2>
+    <!-- Section Pourquoi Me Choisir -->
+    <section class="why-choose-me reveal">
+        <h2 class="section-title">Pourquoi me choisir ?</h2>
+        <div class="why-container">
+            <div class="why-card">
+                <i class="fa-solid fa-cubes"></i>
+                <h3>Polyvalent</h3>
+                <p>Maîtrise complète de la technique (code) et de l'art visuel (design, marketing).</p>
+            </div>
+            <div class="why-card">
+                <i class="fa-solid fa-lightbulb"></i>
+                <h3>Créatif</h3>
+                <p>Des idées originales pour démarquer vos projets de la concurrence.</p>
+            </div>
+            <div class="why-card">
+                <i class="fa-solid fa-calendar-check"></i>
+                <h3>Respect des Délais</h3>
+                <p>Une organisation stricte assurant des livraisons toujours à l'heure.</p>
+            </div>
+            <div class="why-card">
+                <i class="fa-solid fa-rocket"></i>
+                <h3>Solutions Modernes</h3>
+                <p>Utilisation de technologies récentes et adaptées (Python, Flutter, Web).</p>
+            </div>
+            <div class="why-card">
+                <i class="fa-solid fa-handshake"></i>
+                <h3>Accompagnement</h3>
+                <p>Un suivi personnalisé du début à la fin de notre collaboration.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Statistiques (Compteurs animés) -->
+    <section class="stats-section reveal">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h3 class="stat-number" data-target="15">0</h3>
+                <p>Projets Réalisés</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="stat-number" data-target="5">0</h3>
+                <p>Domaines Maîtrisés</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="stat-number" data-target="100">0</h3>
+                <p>% de Motivation</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Services Détaillés -->
+    <section id="services" class="reveal">
+        <h2 class="section-title">Mes Services & Expertises</h2>
         <div class="services-container">
-            
-            <!-- 1. Génie Logiciel & Bureautique -->
             <div class="service-card">
-                <div class="card-icon"><i class="fa-solid fa-laptop-code"></i></div>
-                <h3>Programmation & Bureautique</h3>
-                <p>Développement d'applications robustes avec <strong>Python (Tkinter)</strong> et solutions mobiles modernes avec <strong>Flutter & Dart</strong>. Gestion de bases de données <strong>SQLite</strong> et maîtrise experte des outils de bureautique.</p>
+                <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+                <h3>Création de sites web</h3>
+                <p>Conception de sites vitrines et applications web sur mesure, rapides, fluides et optimisés pour tous types d'écrans (Responsive Design).</p>
             </div>
 
-            <!-- 2. Design Graphique -->
+            <div class="service-card">
+                <div class="card-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <h3>Développement Mobile</h3>
+                <p>Création d'applications mobiles multiplateformes performantes pour Android et iOS en utilisant le framework <strong>Flutter & Dart</strong>.</p>
+            </div>
+
             <div class="service-card">
                 <div class="card-icon"><i class="fa-solid fa-palette"></i></div>
-                <h3>Design Graphique & Branding</h3>
-                <p>Création d'identités visuelles percutantes, logos 2D/3D de haute qualité, chartes graphiques et affiches publicitaires professionnelles pour sublimer l'image de marque.</p>
+                <h3>Création de Logos & Branding</h3>
+                <p>Conception d'identités visuelles uniques, logos professionnels 2D/3D et chartes graphiques pour sublimer votre marque.</p>
             </div>
 
-            <!-- 3. Marketing Digital -->
             <div class="service-card">
-                <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <h3>Marketing Digital</h3>
-                <p>Conception et déploiement de stratégies publicitaires performantes, tunnels de conversion, analyses d'audience et campagnes ciblées pour maximiser l'impact en ligne.</p>
+                <div class="card-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                <h3>Marketing & Publicité</h3>
+                <p>Déploiement de stratégies publicitaires performantes sur Facebook, Instagram et Google pour maximiser vos leads et ventes.</p>
             </div>
 
-            <!-- 4. Community Management -->
             <div class="service-card">
                 <div class="card-icon"><i class="fa-solid fa-users-gear"></i></div>
                 <h3>Community Management</h3>
-                <p>Gestion, animation et modération stratégique des réseaux sociaux. Création de calendriers éditoriaux, planification de contenu à fort engagement et gestion de la relation client digitale.</p>
-            </div>
-
-            <!-- 5. Passions & Art Culinaire -->
-            <div class="service-card">
-                <div class="card-icon"><i class="fa-solid fa-guitar"></i></div>
-                <h3>Art Culinaire & Musique</h3>
-                <p>Expertise artisanale et entrepreneuriale dans la création de <strong>gaufres</strong> et pâtisseries fines, alliée à une sensibilité artistique en tant que <strong>musicien guitariste</strong>.</p>
+                <p>Animation, modération de vos réseaux sociaux et création de calendriers éditoriaux pour fidéliser votre communauté au quotidien.</p>
             </div>
         </div>
 
-        <!-- Grille de badges technologiques (incluant Web, Python et Flutter) -->
-        <div class="skills-grid">
+        <div class="skills-grid reveal">
             <span class="skill-badge"><i class="fa-brands fa-python"></i> Python / Tkinter</span>
             <span class="skill-badge"><i class="fa-solid fa-mobile-screen-button"></i> Flutter / Dart</span>
             <span class="skill-badge"><i class="fa-solid fa-database"></i> SQLite</span>
-            <span class="skill-badge"><i class="fa-solid fa-code"></i> Développement Web (HTML/CSS/JS)</span>
+            <span class="skill-badge"><i class="fa-solid fa-code"></i> HTML / CSS / JS</span>
             <span class="skill-badge"><i class="fa-solid fa-bezier-curve"></i> Design Graphique</span>
             <span class="skill-badge"><i class="fa-solid fa-bullhorn"></i> Marketing Digital</span>
-            <span class="skill-badge"><i class="fa-solid fa-comments"></i> Community Management</span>
-            <span class="skill-badge"><i class="fa-solid fa-file-lines"></i> Outils Bureautique</span>
             <span class="skill-badge"><i class="fa-solid fa-stroopwafel"></i> Pâtisserie (Gaufres)</span>
             <span class="skill-badge"><i class="fa-solid fa-music"></i> Musicien Guitariste</span>
         </div>
     </section>
 
-    <!-- Section Contact Direct avec WhatsApp, Facebook et LinkedIn -->
-    <section id="contact" class="contact-section">
+    <!-- Section Réalisations (Portfolio) -->
+    <section id="portfolio" class="portfolio-section reveal">
+        <h2 class="section-title">Mes Réalisations</h2>
+        <p class="section-subtitle">Découvrez un aperçu concret de mes derniers travaux techniques et visuels</p>
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <div class="portfolio-img-placeholder"><i class="fa-solid fa-laptop-code"></i></div>
+                <div class="portfolio-info">
+                    <h3>Gestion de Cours</h3>
+                    <p>Logiciel de gestion scolaire intuitif construit avec Python (Tkinter) connecté à une base SQLite.</p>
+                    <span class="portfolio-tag">Python & SQLite</span>
+                </div>
+            </div>
+
+            <div class="portfolio-card">
+                <div class="portfolio-img-placeholder"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <div class="portfolio-info">
+                    <h3>App Mobile Flutter</h3>
+                    <p>Développement d'une application de services mobile avec transition de pages moderne et API.</p>
+                    <span class="portfolio-tag">Flutter & Dart</span>
+                </div>
+            </div>
+
+            <div class="portfolio-card">
+                <div class="portfolio-img-placeholder"><i class="fa-solid fa-compass-drafting"></i></div>
+                <div class="portfolio-info">
+                    <h3>Branding Voldigood</h3>
+                    <p>Identité de marque complète, création de maquettes professionnelles et d'un logo 3D unique.</p>
+                    <span class="portfolio-tag">Design Graphique</span>
+                </div>
+            </div>
+
+            <div class="portfolio-card">
+                <div class="portfolio-img-placeholder"><i class="fa-solid fa-globe"></i></div>
+                <div class="portfolio-info">
+                    <h3>Portfolio Personnel</h3>
+                    <p>Développement de cette plateforme vitrine intégrant du code dynamique, du CSS premium et du JavaScript fluide.</p>
+                    <span class="portfolio-tag">Web (HTML/CSS/JS)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Témoignages -->
+    <section class="testimonials-section reveal">
+        <h2 class="section-title">Ce que disent mes clients</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Lopamba a fait preuve d'un professionnalisme exemplaire. Notre application Python est robuste et très ergonomique. Je recommande vivement !"</p>
+                <div class="testimonial-user">
+                    <h4>Client Confidentiel</h4>
+                    <span>Secteur Éducatif</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Le design graphique réalisé est incroyable, le logo 3D capte parfaitement l'esprit de notre marque. Un travail propre et rapide !"</p>
+                <div class="testimonial-user">
+                    <h4>Partenaire local</h4>
+                    <span>Secteur Commercial</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bannière Slogan -->
+    <div class="slogan-banner reveal">
+        <p>"Vous satisfaire c'est notre première priorité 👌"</p>
+    </div>
+
+    <!-- Section Contact -->
+    <section id="contact" class="contact-section reveal">
         <h2 class="section-title">Travaillons ensemble !</h2>
         <p class="contact-text">Tu as un projet innovant ? Besoin d'une expertise technique ou d'un design professionnel ?</p>
         
@@ -147,16 +266,53 @@
             <p class="phone-number">+243 995 372 992</p>
         </div>
 
-        <!-- Liens réseaux sociaux (Ajoute tes adresses à la place des #) -->
         <div class="social-links">
-            <a href="Https://www.facebook.com/voldi.lopamba" target="_blank" title="Facebook">
+            <a href="https://www.facebook.com/voldi.lopamba" target="_blank" title="Facebook">
                 <i class="fa-brands fa-facebook-f"></i>
             </a>
-            <a href="Https://www.linkedin.com/in/vodieu-lopamba-676525377?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" title="LinkedIn">
+            <a href="https://www.linkedin.com/in/vodieu-lopamba-676525377?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" title="LinkedIn">
                 <i class="fa-brands fa-linkedin-in"></i>
             </a>
         </div>
     </section>
+
+    <!-- Agent IA Chatbot : Lopamba IA -->
+    <div id="chat-widget" class="chat-widget">
+        <!-- Bouton d'activation -->
+        <button id="chat-launcher" class="chat-launcher" title="Discuter avec Lopamba IA">
+            <i class="fa-solid fa-comments"></i>
+        </button>
+        
+        <!-- Boîte de dialogue du Chatbot -->
+        <div id="chat-container" class="chat-container">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <div class="chat-avatar">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h4>Lopamba IA</h4>
+                        <span class="status-online"><span class="dot"></span>En ligne</span>
+                    </div>
+                </div>
+                <button id="chat-close" class="chat-close-btn">&times;</button>
+            </div>
+            
+            <div id="chat-messages" class="chat-messages">
+                <div class="chat-message bot">
+                    Bonjour ! Je suis <strong>Lopamba IA</strong>, l'assistant virtuel de Lopamba. 🤖<br><br>
+                    Comment puis-je vous guider ? Vous pouvez me poser des questions sur mes compétences techniques, mes services, mes projets ou sur la façon de me contacter.
+                </div>
+            </div>
+            
+            <div class="chat-footer">
+                <input type="text" id="chat-input" placeholder="Écrivez votre message..." autocomplete="off">
+                <button id="chat-send" class="chat-send-btn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2026 - Lopamba Vodieu Vodieu | Tous droits réservés</p>
