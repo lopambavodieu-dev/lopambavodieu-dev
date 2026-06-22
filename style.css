@@ -11,7 +11,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Sécurité : Bloque la sélection de texte accidentelle */
     -webkit-user-select: none;
     user-select: none;
 }
@@ -23,7 +22,19 @@ body {
     overflow-x: hidden;
 }
 
-/* Barre de Navigation (Logo à gauche, menu à droite) */
+/* --- ANIMATION D'ENTRÉE (SCROLL REVEAL) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- BARRE DE NAVIGATION ET MENU HAMBURGER --- */
 header {
     padding: 20px 10%;
     background: rgba(15, 23, 42, 0.95);
@@ -49,12 +60,12 @@ nav {
     color: var(--primary-color);
 }
 
-nav ul {
+.nav-links {
     display: flex;
     list-style: none;
 }
 
-nav ul li a {
+.nav-links li a {
     color: white;
     text-decoration: none;
     margin-left: 30px;
@@ -62,11 +73,25 @@ nav ul li a {
     font-weight: 500;
 }
 
-nav ul li a:hover {
+.nav-links li a:hover {
     color: var(--primary-color);
 }
 
-/* Accueil avec Filigrane Rendu Très Visible */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--text-white);
+}
+
+/* --- ACCUEIL (HERO SECTION) --- */
 .hero {
     height: 100vh;
     display: flex;
@@ -74,16 +99,17 @@ nav ul li a:hover {
     justify-content: center;
     text-align: center;
     position: relative;
+    padding: 0 10%;
 }
 
 .hero-bg-animation {
     position: absolute;
-    top: 52%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
-    opacity: 0.35; /* Augmenté pour être bien visible en fond */
+    opacity: 0.25;
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -91,10 +117,9 @@ nav ul li a:hover {
     pointer-events: none;
 }
 
-/* Structure de l'ordinateur avec effet Néon Bleu */
 .laptop-frame {
-    width: 700px;
-    height: 400px;
+    width: 750px;
+    height: 420px;
     border: 14px solid #1e293b;
     border-radius: 20px;
     position: relative;
@@ -110,7 +135,6 @@ nav ul li a:hover {
     padding: 20px;
 }
 
-/* Lignes de code Python vertes lumineuses */
 .code-scrolling {
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.9rem;
@@ -126,11 +150,11 @@ nav ul li a:hover {
     to { transform: translateY(-50%); }
 }
 
-/* Contenu textuel principal */
 .hero-content {
     position: relative;
     z-index: 10; 
     text-shadow: 0 2px 10px rgba(15, 23, 42, 0.9);
+    max-width: 800px;
 }
 
 .hero-content h1 {
@@ -143,29 +167,62 @@ nav ul li a:hover {
 }
 
 .hero-content p {
-    font-size: 1.4rem;
-    color: #e2e8f0;
+    font-size: 1.3rem;
+    color: #cbd5e1;
     margin-bottom: 35px;
-    font-weight: 500;
+    line-height: 1.6;
+}
+
+/* Boutons d'accueil */
+.hero-btns {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .btn {
-    display: inline-block;
-    padding: 12px 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
     background: var(--primary-color);
     color: var(--bg-dark);
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
     transition: 0.3s ease;
+    border: 2px solid var(--primary-color);
 }
 
 .btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.4);
+    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
 }
 
-/* Section À Propos (Mise en page : Texte à gauche, Photo à droite) */
+.btn-secondary {
+    background: transparent;
+    color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-color);
+    color: var(--bg-dark);
+}
+
+.btn-outline {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-white);
+}
+
+.btn-outline:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+}
+
+/* --- SECTION À PROPOS --- */
 .about-section {
     padding: 100px 10%;
     background: #1e293b;
@@ -196,7 +253,7 @@ nav ul li a:hover {
 
 .bio-box, .soft-skills-box {
     background: #0f172a;
-    padding: 40px;
+    padding: 35px;
     border-radius: 12px;
     border-left: 5px solid var(--primary-color);
 }
@@ -217,7 +274,7 @@ nav ul li a:hover {
 
 .soft-skills-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 15px;
     list-style: none;
 }
@@ -234,7 +291,6 @@ nav ul li a:hover {
     color: var(--primary-color);
 }
 
-/* Design de la Photo de profil (Colonne Droite) */
 .profile-card {
     position: relative;
     width: 100%;
@@ -257,7 +313,7 @@ nav ul li a:hover {
     object-fit: cover;
     filter: grayscale(15%);
     transition: 0.4s ease;
-    pointer-events: none; /* Protection basique anti-drag */
+    pointer-events: none;
 }
 
 .profile-card:hover .profile-img {
@@ -280,11 +336,102 @@ nav ul li a:hover {
     letter-spacing: 1px;
 }
 
-/* Cartes des Compétences */
+/* --- SECTION POURQUOI ME CHOISIR --- */
+.why-choose-me {
+    padding: 100px 10%;
+    background: #0f172a;
+    text-align: center;
+}
+
+.why-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.why-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.why-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.1);
+}
+
+.why-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.why-card h3 {
+    margin-bottom: 12px;
+    font-size: 1.25rem;
+}
+
+.why-card p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* --- SECTION STATISTIQUES (ANIMÉES) --- */
+.stats-section {
+    padding: 80px 10%;
+    background: #1e293b;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    background: var(--bg-dark);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    border-bottom: 4px solid var(--primary-color);
+}
+
+.stat-number {
+    font-size: 3rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.stat-item p {
+    color: #cbd5e1;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* --- SECTION COMPÉTENCES / SERVICES --- */
 .section-title {
     text-align: center;
-    margin-top: 80px;
     font-size: 2.5rem;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--primary-color);
+    margin: 15px auto 0;
+    border-radius: 2px;
 }
 
 .services-container {
@@ -326,7 +473,6 @@ nav ul li a:hover {
     line-height: 1.6;
 }
 
-/* Grille de Badges */
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
@@ -355,12 +501,149 @@ nav ul li a:hover {
     transform: scale(1.05);
 }
 
-/* Section Contact */
+/* --- SECTION RÉALISATIONS (PORTFOLIO) --- */
+.portfolio-section {
+    padding: 100px 10%;
+    background: #0f172a;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #94a3b8;
+    margin-bottom: 45px;
+    font-size: 1.1rem;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.portfolio-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.portfolio-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary-color);
+    box-shadow: 0 15px 30px rgba(0, 212, 255, 0.15);
+}
+
+/* Zone réservée pour les captures d'écran (Image) */
+.portfolio-img-container {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    overflow: hidden;
+    position: relative;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+.portfolio-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Effet zoom de la capture d'écran au survol de la carte */
+.portfolio-card:hover .portfolio-img {
+    transform: scale(1.08);
+}
+
+.portfolio-info {
+    padding: 25px;
+}
+
+.portfolio-info h3 {
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+    color: var(--text-white);
+}
+
+.portfolio-info p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.portfolio-tag {
+    display: inline-block;
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--primary-color);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* --- SECTION TÉMOIGNAGES --- */
+.testimonials-section {
+    padding: 100px 10%;
+    background: #1e293b;
+    text-align: center;
+}
+
+.testimonials-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.testimonial-card {
+    background: var(--bg-dark);
+    padding: 35px;
+    border-radius: 12px;
+    border-left: 5px solid var(--primary-color);
+    text-align: left;
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: #cbd5e1;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.testimonial-user h4 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.testimonial-user span {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+/* --- BANNIÈRE SLOGAN --- */
+.slogan-banner {
+    padding: 60px 10%;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(15, 23, 42, 0.8) 100%);
+    text-align: center;
+    border-top: 1px solid rgba(0, 212, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.slogan-banner p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+/* --- SECTION CONTACT --- */
 .contact-section {
     padding: 90px 10%;
     text-align: center;
     background: #0f172a;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .contact-text {
@@ -396,7 +679,6 @@ nav ul li a:hover {
     color: var(--primary-color);
 }
 
-/* Boutons Réseaux Sociaux Animés */
 .social-links {
     display: flex;
     justify-content: center;
@@ -427,7 +709,6 @@ nav ul li a:hover {
     border-color: var(--primary-color);
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 30px;
@@ -435,35 +716,292 @@ footer {
     color: #64748b;
     font-size: 0.9rem;
 }
-/* ===================================
-   RESPONSIVE MOBILE & TABLETTE
-=================================== */
 
+/* --- CHATBOT LOPAMBA AI --- */
+.chat-widget {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1001;
+}
+
+/* Bouton d'activation */
+.chat-launcher {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: var(--bg-dark);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.chat-launcher:hover {
+    transform: scale(1.1);
+}
+
+/* Fenêtre de chat */
+.chat-container {
+    position: fixed;
+    bottom: 105px;
+    right: 30px;
+    width: 360px;
+    height: 500px;
+    background: var(--card-bg);
+    border-radius: 15px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.chat-container.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* En-tête du chat */
+.chat-header {
+    background: #0f172a;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.chat-avatar {
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border: 1px solid var(--primary-color);
+}
+
+.chat-header-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-white);
+}
+
+.status-online {
+    font-size: 0.75rem;
+    color: #10b981;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-online .dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    display: inline-block;
+    animation: chatPulse 1.5s infinite;
+}
+
+@keyframes chatPulse {
+    0% { transform: scale(0.9); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+    100% { transform: scale(0.9); opacity: 1; }
+}
+
+.chat-close-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.3s;
+    line-height: 1;
+}
+
+.chat-close-btn:hover {
+    color: var(--primary-color);
+}
+
+/* Zone des messages */
+.chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #0f172a;
+}
+
+.chat-message {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.chat-message.bot {
+    align-self: flex-start;
+    background: var(--card-bg);
+    color: var(--text-white);
+    border-bottom-left-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.chat-message.user {
+    align-self: flex-end;
+    background: var(--primary-color);
+    color: var(--bg-dark);
+    border-bottom-right-radius: 2px;
+    font-weight: 500;
+}
+
+/* Zone de saisie */
+.chat-footer {
+    padding: 12px;
+    display: flex;
+    gap: 8px;
+    background: var(--card-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.chat-footer input {
+    flex: 1;
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    border-radius: 25px;
+    color: var(--text-white);
+    outline: none;
+    font-size: 0.9rem;
+    transition: border-color 0.3s;
+}
+
+.chat-footer input:focus {
+    border-color: var(--primary-color);
+}
+
+.chat-send-btn {
+    background: var(--primary-color);
+    color: var(--bg-dark);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.chat-send-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Indicateur d'écriture */
+.chat-typing-indicator {
+    align-self: flex-start;
+    background: var(--card-bg);
+    padding: 12px 16px;
+    border-radius: 12px;
+    border-bottom-left-radius: 2px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.chat-typing-indicator span {
+    width: 6px;
+    height: 6px;
+    background: #94a3b8;
+    border-radius: 50%;
+    display: inline-block;
+    animation: chatBounce 1.4s infinite ease-in-out both;
+}
+
+.chat-typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+.chat-typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes chatBounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
+
+/* --- RESPONSIVE MOBILE & TABLETTE --- */
 @media (max-width: 768px) {
-
     header {
         padding: 15px 5%;
     }
 
-    nav {
+    /* Activation du Menu Hamburger */
+    .menu-toggle {
+        display: block;
+    }
+
+    .menu-toggle.is-active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.is-active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle.is-active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-links {
+        position: fixed;
+        left: -100%;
+        top: 70px;
         flex-direction: column;
-        gap: 15px;
-    }
-
-    .logo {
-        font-size: 1.3rem;
+        background-color: rgba(15, 23, 42, 0.98);
+        width: 100%;
+        height: calc(100vh - 70px);
         text-align: center;
+        transition: 0.3s ease;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.3);
+        padding: 40px 0;
+        z-index: 999;
     }
 
-    nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
+    .nav-links.active {
+        left: 0;
     }
 
-    nav ul li a {
+    .nav-links li {
+        margin: 20px 0;
+    }
+
+    .nav-links li a {
         margin-left: 0;
-        font-size: 0.9rem;
+        font-size: 1.2rem;
+        display: block;
     }
 
     .hero {
@@ -472,19 +1010,21 @@ footer {
     }
 
     .hero-content h1 {
-        font-size: 2.4rem;
-        line-height: 1.2;
+        font-size: 2.2rem;
     }
 
     .hero-content p {
         font-size: 1rem;
-        line-height: 1.5;
-        padding: 0 10px;
+    }
+
+    .hero-btns {
+        flex-direction: column;
+        width: 100%;
     }
 
     .btn {
         width: 100%;
-        max-width: 320px;
+        justify-content: center;
     }
 
     .laptop-frame {
@@ -492,107 +1032,53 @@ footer {
         height: 220px;
     }
 
-    .laptop-screen {
-        padding: 10px;
-    }
-
     .code-scrolling {
         font-size: 0.55rem;
     }
 
-    .about-section,
-    .contact-section {
-        padding: 80px 5%;
+    .about-section, .why-choose-me, .stats-section, .portfolio-section, .testimonials-section, .contact-section {
+        padding: 60px 5%;
     }
 
     .about-container {
         flex-direction: column;
     }
 
-    .about-left,
-    .about-right {
+    .about-left, .about-right {
         width: 100%;
-        min-width: auto;
     }
 
-    .bio-box,
-    .soft-skills-box {
+    .bio-box, .soft-skills-box {
         padding: 25px;
-    }
-
-    .bio-text {
-        font-size: 1rem;
     }
 
     .soft-skills-list {
         grid-template-columns: 1fr;
     }
 
-    .profile-card {
-        max-width: 260px;
-    }
-
     .section-title {
         font-size: 2rem;
     }
 
-    .services-container {
+    .services-container, .portfolio-grid, .testimonials-container {
         grid-template-columns: 1fr;
-        padding: 30px 5%;
+        padding: 20px 0;
     }
 
-    .service-card {
-        padding: 25px;
-    }
-
-    .skills-grid {
-        padding: 20px 5% 60px;
-    }
-
-    .skill-badge {
-        font-size: 0.8rem;
-        padding: 8px 16px;
-    }
-
-    .contact-text {
-        font-size: 1rem;
-    }
-
-    .whatsapp-btn {
-        width: 100%;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .phone-number {
-        font-size: 1rem;
-    }
-
-    footer {
-        font-size: 0.8rem;
-        padding: 20px;
+    .slogan-banner p {
+        font-size: 1.3rem;
     }
 }
 
 @media (max-width: 480px) {
-
-    .hero-content h1 {
-        font-size: 2rem;
+    .chat-widget {
+        bottom: 20px;
+        right: 20px;
     }
-
-    .hero-content p {
-        font-size: 0.9rem;
-    }
-
-    .logo {
-        font-size: 1.1rem;
-    }
-
-    .section-title {
-        font-size: 1.7rem;
-    }
-
-    .laptop-frame {
-        height: 180px;
+    .chat-container {
+        bottom: 90px;
+        right: 20px;
+        width: calc(100vw - 40px);
+        height: 420px;
     }
 }
