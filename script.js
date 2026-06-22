@@ -226,7 +226,7 @@ if (chatLauncher && chatContainer && chatClose && chatInput && chatSend && chatM
 
         // Services & Prestations
         if (input.includes('service') || input.includes('faire') || input.includes('travail') || input.includes('creer') || input.includes('créer') || input.includes('aide')) {
-            return "Lopamba propose plusieurs types de prestations de services :<br>1️⃣ Création de sites vitrines et applications web sur mesure.<br>2️⃣ Conception d'applications mobiles performantes.<br>3️⃣ Création d'identités visuelles et logos professionnels 2D/3D.<br>4️⃣ Stratégies de marketing digital et campagnes publicitaires.<br>5️⃣ Community Management pour vos réseaux sociaux.";
+            return "Lopamba propose plusieurs types de prestations de services :<br>1️⃣ Création de sites vitrines,E-commerce et applications web sur mesure.<br>2️⃣ Conception d'applications mobiles performantes.<br>3️⃣ Création d'identités visuelles et logos professionnels 2D/3D.<br>4️⃣ Stratégies de marketing digital et campagnes publicitaires.<br>5️⃣ Community Management pour vos réseaux sociaux.";
         }
 
         // Divers / Passion musique & cuisine
