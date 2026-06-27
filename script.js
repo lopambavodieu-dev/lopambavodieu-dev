@@ -211,7 +211,7 @@ if (chatLauncher && chatContainer && chatClose && chatInput && chatSend && chatM
 
         // Compétences techniques & Technologies
         if (input.includes('competence') || input.includes('compétence') || input.includes('techno') || input.includes('stack') || input.includes('python') || input.includes('flutter') || input.includes('code') || input.includes('langage') || input.includes('sqlite') || input.includes('html') || input.includes('css')) {
-            return "Lopamba maîtrise plusieurs compétences clés :<br>• <strong>Développement de bureau</strong> : Python / Tkinter.<br>• <strong>Développement mobile</strong> : Flutter / Dart.<br>• <strong>Bases de données</strong> : SQLite.<br>• <strong>Développement web</strong> : HTML / CSS / JavaScript.<br>• <strong>Création visuelle</strong> : Design graphique & branding.";
+            return "Lopamba maîtrise plusieurs compétences clés :<br>• <strong>Développement de bureau</strong> : Python .<br>• <strong>Développement mobile</strong> : Flutter / Dart.<br>• <strong>Bases de données</strong> : SQLite.<br>• <strong>Développement web</strong> : HTML / CSS / JavaScript.<br>• <strong>Création visuelle</strong> : Design graphique & branding.";
         }
 
         // Tarifs / Prix / Devis
