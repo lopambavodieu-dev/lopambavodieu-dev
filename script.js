@@ -1,3 +1,45 @@
+// 0. GESTION DE L'ÉCRAN DE CHARGEMENT (PRELOADER - DURÉE : 2 SECONDES)
+document.addEventListener('DOMContentLoaded', () => {
+    const preloader = document.getElementById('preloader');
+    const loadingBar = document.querySelector('.loading-bar');
+    const loadingPct = document.getElementById('loading-pct');
+    
+    if (preloader && loadingBar && loadingPct) {
+        // Empêcher le défilement de la page pendant le chargement
+        document.body.style.overflow = 'hidden';
+        
+        const duration = 2000; // 2000 ms = 2 secondes
+        const intervalTime = 20; // Mise à jour toutes les 20 ms
+        const steps = duration / intervalTime;
+        let step = 0;
+        
+        const progressInterval = setInterval(() => {
+            step++;
+            const progress = Math.min((step / steps) * 100, 100);
+            
+            // Mise à jour de la barre de progression et du pourcentage
+            loadingBar.style.width = `${progress}%`;
+            loadingPct.textContent = `${Math.round(progress)}%`;
+            
+            if (step >= steps) {
+                clearInterval(progressInterval);
+                
+                // Transition de disparition (fade out)
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    document.body.style.overflow = ''; // Restaurer le scroll
+                    
+                    // Retrait définitif de l'élément du layout après transition
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }, 200);
+            }
+        }, intervalTime);
+    }
+});
+
+
 // 1. Flux de code Python défilant en arrière-plan
 const codeContainer = document.getElementById('python-code');
 
@@ -9,7 +51,7 @@ const pythonLines = [
     "class VoldigoodSolutions:",
     "    def __init__(self):",
     "        self.developer = 'Lopamba Vodieu Vodieu'",
-    "        self.stack = ['Python', 'Flutter', 'Dart', 'SQL', 'Web HTML/CSS']",
+    "        self.stack = ['Python', 'Flutter', 'Dart', 'SQL', 'Web HTML/CSS', 'AI Prompting']",
     "        self.creative_skills = ['Design 3D', 'Branding']",
     "",
     "    def run_portfolio(self):",
@@ -39,13 +81,11 @@ const navLinks = document.querySelector('.nav-links');
 const navItems = document.querySelectorAll('.nav-links a');
 
 if (mobileMenu && navLinks) {
-    // Activer / désactiver le menu au clic sur l'icône hamburger
     mobileMenu.addEventListener('click', () => {
         mobileMenu.classList.toggle('is-active');
         navLinks.classList.toggle('active');
     });
 
-    // Fermer le menu mobile de manière fluide après avoir cliqué sur un lien
     navItems.forEach(item => {
         item.addEventListener('click', () => {
             mobileMenu.classList.remove('is-active');
@@ -62,11 +102,11 @@ const revealOnScroll = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('active');
-            observer.unobserve(entry.target); // L'animation se joue uniquement la première fois
+            observer.unobserve(entry.target);
         }
     });
 }, {
-    threshold: 0.15 // L'élément commence son animation quand 15% de sa hauteur est visible
+    threshold: 0.15
 });
 
 revealElements.forEach(el => revealOnScroll.observe(el));
@@ -80,7 +120,7 @@ let animated = false;
 const startCounters = () => {
     statNumbers.forEach(counter => {
         const target = +counter.getAttribute('data-target');
-        const speed = 100; // Contrôle la vitesse globale de l'animation
+        const speed = 100;
         const increment = target / speed;
 
         const updateCount = () => {
@@ -100,7 +140,7 @@ const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting && !animated) {
             startCounters();
-            animated = true; // Fixe l'animation pour éviter de la répéter
+            animated = true;
         }
     });
 }, { threshold: 0.3 });
@@ -116,26 +156,22 @@ document.addEventListener('contextmenu', function(e) {
 });
 
 document.addEventListener('keydown', function(e) {
-    // Bloquer F12
     if (e.keyCode == 123) {
         e.preventDefault();
     }
-    // Bloquer Ctrl+Shift+I et Ctrl+Shift+J (outils de dév)
     if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) {
         e.preventDefault();
     }
-    // Bloquer Ctrl+U (visualiser le code source)
     if (e.ctrlKey && e.keyCode == 85) {
         e.preventDefault();
     }
-    // Bloquer Ctrl+S (sauvegarde de la page web)
     if (e.ctrlKey && e.keyCode == 83) {
         e.preventDefault();
     }
 });
 
 
-// 6. INTÉGRATION DE L'AGENT IA CHATBOT : LOPAMBA IA
+// 6. INTÉGRATION DE L'AGENT IA CHATBOT : LOPAMBA IA (INTELLIGENCE AMÉLIORÉE)
 const chatLauncher = document.getElementById('chat-launcher');
 const chatContainer = document.getElementById('chat-container');
 const chatClose = document.getElementById('chat-close');
@@ -145,7 +181,6 @@ const chatMessages = document.getElementById('chat-messages');
 
 if (chatLauncher && chatContainer && chatClose && chatInput && chatSend && chatMessages) {
     
-    // Ouvrir / Fermer le widget de chat
     chatLauncher.addEventListener('click', () => {
         chatContainer.classList.toggle('active');
     });
@@ -154,7 +189,6 @@ if (chatLauncher && chatContainer && chatClose && chatInput && chatSend && chatM
         chatContainer.classList.remove('active');
     });
 
-    // Envoyer un message lors du clic ou de la touche Entrée
     chatSend.addEventListener('click', handleUserMessage);
     chatInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -166,22 +200,18 @@ if (chatLauncher && chatContainer && chatClose && chatInput && chatSend && chatM
         const messageText = chatInput.value.trim();
         if (messageText === '') return;
 
-        // Message de l'utilisateur à l'écran
         appendMessage(messageText, 'user');
         chatInput.value = '';
 
-        // Indicateur visuel d'écriture ("Lopamba IA écrit...")
         const typingIndicator = showTypingIndicator();
 
-        // Réponse simulée après 1,5 seconde
         setTimeout(() => {
             typingIndicator.remove();
             const botResponse = generateBotResponse(messageText);
             appendMessage(botResponse, 'bot');
-        }, 1500);
+        }, 1200);
     }
 
-    // Fonction d'ajout de bulle de message
     function appendMessage(text, sender) {
         const msgDiv = document.createElement('div');
         msgDiv.classList.add('chat-message', sender);
@@ -190,7 +220,6 @@ if (chatLauncher && chatContainer && chatClose && chatInput && chatSend && chatM
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // Afficher l'indicateur d'écriture
     function showTypingIndicator() {
         const indicator = document.createElement('div');
         indicator.classList.add('chat-typing-indicator');
@@ -200,49 +229,100 @@ if (chatLauncher && chatContainer && chatClose && chatInput && chatSend && chatM
         return indicator;
     }
 
-    // Traitement local des requêtes (Mots-clés / Réponses d'orientation)
+    // Fonction utilitaire pour normaliser le texte (suppression d'accents et uniformisation)
+    function cleanText(text) {
+        return text.toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .trim();
+    }
+
     function generateBotResponse(userInput) {
-        const input = userInput.toLowerCase();
+        const cleaned = cleanText(userInput);
 
-        // Salutations
-        if (input.includes('bonjour') || input.includes('salut') || input.includes('hello') || input.includes('hey')) {
-            return "Bonjour ! Comment puis-je vous aider aujourd'hui ? Je peux vous renseigner sur le parcours ou les services de Lopamba.";
+        // Base de connaissances intelligente classée par thématiques
+        const knowledgeBase = [
+            {
+                keys: ['bonjour', 'salut', 'hello', 'hey', 'hi', 'bonsoir', 'yo'],
+                reply: "Bonjour ! Ravi de vous accueillir sur mon espace de discussion. 😊 Comment puis-je vous guider ? Je peux vous renseigner sur mes compétences, les avantages de mes services, ou comment démarrer un projet."
+            },
+            {
+                keys: ['prompt', 'engineering', 'ia', 'intelligence artificielle', 'gpt', 'midjourney', 'llm', 'claude'],
+                reply: "L'<strong>Ingénierie de Prompt (Prompt Engineering)</strong> est une de mes expertises clés. Elle consiste à structurer et optimiser les instructions destinées aux IA génératives. Pour un client, cela permet :<br>• D'automatiser intelligemment les processus métiers.<br>• De générer du contenu hautement qualitatif et ultra-ciblé.<br>• D'intégrer des fonctionnalités cognitives avancées directement dans vos applications."
+            },
+            {
+                keys: ['avantage', 'benefice', 'interet', 'gain', 'pourquoi', 'valeur', 'utilite'],
+                reply: "Investir dans mes services vous apporte des bénéfices concrets :<br>• 🌐 <strong>Site Web :</strong> Une présence mondiale et crédible 24h/24 pour attirer de nouveaux prospects en continu.<br>• 📱 <strong>Application Mobile :</strong> Une proximité maximale avec vos clients grâce aux notifications instantanées.<br>• 👥 <strong>Community Manager :</strong> Une e-réputation active qui fédère vos abonnés pendant que vous gagnez du temps.<br>• 🎨 <strong>Identité Visuelle & Affiches :</strong> Une image de marque inoubliable, professionnelle et impactante face à vos concurrents."
+            },
+            {
+                keys: ['competence', 'techno', 'stack', 'python', 'flutter', 'code', 'langage', 'sqlite', 'html', 'css', 'javascript', 'js', 'dart', 'tkinter'],
+                reply: "Mes compétences techniques principales couvrent :<br>• 🤖 <strong>Prompt Engineering</strong> : Structuration d'invites IA avancées.<br>• 📱 <strong>Applications Mobiles</strong> : Flutter & Dart.<br>• 💻 <strong>Logiciels de Bureau</strong> : Python & Tkinter.<br>• 🌐 <strong>Applications Web</strong> : HTML5, CSS3 premium, JavaScript.<br>• 🗄️ <strong>Bases de données</strong> : SQLite.<br>• 🎨 <strong>Création Visuelle</strong> : Design de marque (logos 2D/3D, branding) sous la marque <i>Voldigood Design</i>."
+            },
+            {
+                keys: ['contact', 'joindre', 'telephone', 'téléphone', 'whatsapp', 'mail', 'ecrire', 'numero', 'numéro', 'facebook', 'linkedin', 'adresse'],
+                reply: "Vous pouvez me contacter très simplement :<br>• 📱 <strong>WhatsApp / Tél</strong> : <a href='https://wa.me/243995372992' target='_blank' style='color:#00d4ff; text-decoration:underline;'>+243 995 372 992</a><br>• 🌐 <strong>LinkedIn</strong> : <a href='https://www.linkedin.com/in/vodieu-lopamba-676525377' target='_blank' style='color:#00d4ff; text-decoration:underline;'>Consulter mon profil</a><br>• 📘 <strong>Facebook</strong> : <a href='https://www.facebook.com/voldi.lopamba' target='_blank' style='color:#00d4ff; text-decoration:underline;'>Suivre ma page</a>."
+            },
+            {
+                keys: ['service', 'faire', 'travail', 'creer', 'aide', 'prestation', 'offre', 'developpement', 'conception', 'branding', 'logo', 'community'],
+                reply: "Je propose des services d'accompagnement complets :<br>1️⃣ <strong>Création Web</strong> (Sites vitrines responsives).<br>2️⃣ <strong>Développement Mobile</strong> (Applications performantes Android & iOS via Flutter).<br>3️⃣ <strong>Logiciels sur mesure</strong> (Bureautique Python/SQLite).<br>4️⃣ <strong>Identité Visuelle & Affiches</strong> (Logos professionnels et visuels publicitaires).<br>5️⃣ <strong>Marketing Digital & Community Management</strong> (Animation des réseaux sociaux)."
+            },
+            {
+                keys: ['cv', 'curriculum', 'telecharger', 'télécharger', 'pdf', 'parcours', 'diplome', 'etude'],
+                reply: "Vous pouvez télécharger mon CV complet au format PDF directement en cliquant sur le bouton <strong>'Télécharger mon CV'</strong> disponible en haut de la page d'accueil. N'hésitez pas à l'étudier !"
+            },
+            {
+                keys: ['projet', 'realisation', 'travaux', 'oeuvre', 'portfolio', 'exemple', 'creations'],
+                reply: "Voici un aperçu de mes projets phares :<br>• 📂 <strong>Gestion de Cours</strong> : Logiciel bureautique robuste écrit en Python avec interface Tkinter et stockage SQLite.<br>• 📱 <strong>Application Mobile</strong> : Un produit multiplateforme natif développé sous Flutter.<br>• 🎨 <strong>Identité Voldigood</strong> : Travail complet de branding, de design de logo 3D et de communication visuelle.<br>Pour voir des images de mes réalisations graphiques, n'hésitez pas à explorer la galerie défilante située au milieu de mon site !"
+            },
+            {
+                keys: ['tarif', 'prix', 'combien', 'devis', 'cout', 'coût', 'budget', 'facture', 'payer'],
+                reply: "Mes tarifs s'adaptent à la complexité et à l'envergure de chaque projet. Pour obtenir une estimation gratuite ou en discuter de vive voix, contactez-moi directement par WhatsApp (<a href='https://wa.me/243995372992' target='_blank' style='color:#00d4ff; text-decoration:underline;'>+243 995 372 992</a>). Nous trouverons la formule adéquate."
+            },
+            {
+                keys: ['voldigood', 'design', 'affiche', 'visuel', 'maquette'],
+                reply: "<strong>Voldigood Design</strong> est ma marque signature pour tous les travaux créatifs et artistiques. J'y réalise des chartes graphiques, des maquettes d'applications, des logos 2D/3D et des affiches publicitaires à fort impact visuel."
+            },
+            {
+                keys: ['localisation', 'habite', 'ou es-tu', 'adresse', 'pays', 'ville', 'congo', 'kinshasa', 'rdc'],
+                reply: "Je suis basé à <strong>Kinshasa, en République Démocratique du Congo (RDC)</strong>. 🇨🇩 Je travaille aussi bien en local qu'à distance (télétravail) avec des clients du monde entier."
+            },
+            {
+                keys: ['dispo', 'libre', 'recruter', 'embaucher', 'freelance', 'emploi', 'contrat'],
+                reply: "Je suis actuellement <strong>disponible</strong> pour de nouvelles missions en freelance, des collaborations de court/moyen terme ou des opportunités de télétravail. Échangeons sur vos besoins !"
+            },
+            {
+                keys: ['guitare', 'musicien', 'musique', 'art', 'passion'],
+                reply: "En dehors de la programmation, je suis un guitariste passionné. 🎸 La musique développe ma rigueur et ma créativité, des atouts que je retranscris directement dans l'architecture de mon code !"
+            },
+            {
+                keys: ['gaufre', 'patisserie', 'cuisine', 'manger', 'gaufres'],
+                reply: "Vous avez l'œil ! En effet, la pâtisserie (particulièrement la confection de bonnes gaufres traditionnelles 🧇) est l'un de mes loisirs favoris pour me détendre loin des écrans."
+            },
+            {
+                keys: ['qui es-tu', 'ton nom', 'lopamba', 'assistant', 'ia', 'robot'],
+                reply: "Je suis <strong>Lopamba IA</strong>, un assistant virtuel créé pour représenter Lopamba Vodieu Vodieu. Je suis configuré pour répondre de manière autonome aux premières interrogations des visiteurs."
+            },
+            {
+                keys: ['methode', 'process', 'etape', 'comment', 'deroule', 'workflow'],
+                reply: "Pour chaque projet, je suis une méthodologie rigoureuse :<br>1️⃣ <strong>Cahier des charges</strong> : Analyse précise de vos besoins.<br>2️⃣ <strong>Maquettage & Design</strong> : Validation du style visuel.<br>3️⃣ <strong>Développement</strong> : Phase d'écriture de code propre.<br>4️⃣ <strong>Tests</strong> : Détection et correction des anomalies.<br>5️⃣ <strong>Livraison</strong> : Mise en ligne et suivi d'utilisation."
+            }
+        ];
+
+        // Recherche d'une correspondance par mot clé
+        for (const item of knowledgeBase) {
+            const hasMatch = item.keys.some(key => cleaned.includes(cleanText(key)));
+            if (hasMatch) {
+                return item.reply;
+            }
         }
 
-        // Compétences techniques & Technologies
-        if (input.includes('competence') || input.includes('compétence') || input.includes('techno') || input.includes('stack') || input.includes('python') || input.includes('flutter') || input.includes('code') || input.includes('langage') || input.includes('sqlite') || input.includes('html') || input.includes('css')) {
-            return "Lopamba maîtrise plusieurs compétences clés :<br>• <strong>Développement de bureau</strong> : Python .<br>• <strong>Développement mobile</strong> : Flutter / Dart.<br>• <strong>Bases de données</strong> : SQLite.<br>• <strong>Développement web</strong> : HTML / CSS / JavaScript.<br>• <strong>Création visuelle</strong> : Design graphique & branding.";
-        }
-
-        // Tarifs / Prix / Devis
-        if (input.includes('tarif') || input.includes('prix') || input.includes('combien') || input.includes('devis') || input.includes('cout') || input.includes('coût')) {
-            return "Chaque projet est unique. Pour discuter de votre budget ou obtenir une estimation de devis, je vous invite à joindre directement Lopamba par WhatsApp en bas de page ou au <strong>+243 995 372 992</strong>.";
-        }
-
-        // Contact / WhatsApp
-        if (input.includes('contact') || input.includes('joindre') || input.includes('telephone') || input.includes('téléphone') || input.includes('whatsapp') || input.includes('mail') || input.includes('adresse') || input.includes('ecrire') || input.includes('écrire')) {
-            return "Vous pouvez contacter Lopamba directement :<br>• Par <strong>WhatsApp</strong> au : <a href='https://wa.me/243995372992' target='_blank' style='color:#00d4ff; text-decoration:underline;'>+243 995 372 992</a><br>• En consultant ses profils Facebook et LinkedIn indiqués au bas du site.";
-        }
-
-        // Services & Prestations
-        if (input.includes('service') || input.includes('faire') || input.includes('travail') || input.includes('creer') || input.includes('créer') || input.includes('aide')) {
-            return "Lopamba propose plusieurs types de prestations de services :<br>1️⃣ Création de sites vitrines,E-commerce et applications web sur mesure.<br>2️⃣ Conception d'applications mobiles performantes.<br>3️⃣ Création d'identités visuelles et logos professionnels 2D/3D.<br>4️⃣ Stratégies de marketing digital et campagnes publicitaires.<br>5️⃣ Community Management pour vos réseaux sociaux.";
-        }
-
-        // Divers / Passion musique & cuisine
-        if (input.includes('guitare') || input.includes('musicien') || input.includes('musique')) {
-            return "En plus du développement, Lopamba est un guitariste amateur passionné. La musique l'aide à nourrir sa créativité pour ses projets techniques ! 🎸";
-        }
-        if (input.includes('gaufre') || input.includes('patisserie') || input.includes('pâtisserie') || input.includes('manger')) {
-            return "Ah ! Vous avez remarqué la gaufre dans les compétences ? En effet, en dehors des écrans, Lopamba apprécie beaucoup cuisiner des pâtisseries et faire de bonnes gaufres !  waffles  waffle 🧇";
-        }
-
-        // Présentation de l'IA
-        if (input.includes('qui es-tu') || input.includes('ton nom') || input.includes('lopamba')) {
-            return "Je suis <strong>Lopamba IA</strong>, un assistant conversationnel léger conçu pour vous guider rapidement à travers le portfolio et répondre à vos questions initiales.";
-        }
-
-        // Réponse par défaut
-        return "Je ne suis pas sûr de bien comprendre votre demande. 🤔<br><br>Vous pouvez me demander ses compétences, ses services, ses coordonnées, ou en savoir plus sur son profil. Pour toute demande précise, vous pouvez directement cliquer sur le bouton WhatsApp pour joindre Lopamba au <strong>+243 995 372 992</strong>.";
+        // Réponse par défaut améliorée si aucune correspondance n'est trouvée
+        return "Je ne suis pas certain de saisir l'objet de votre demande. 🤔<br><br>" +
+               "N'hésitez pas à me poser une question claire concernant :<br>" +
+               "• Mes <strong>compétences</strong> (Développement, Prompt Engineering, Design)<br>" +
+               "• Les <strong>avantages</strong> clients de mes services (site, appli, réseaux sociaux, affiches, logo)<br>" +
+               "• Mes <strong>réalisations</strong> ou mon <strong>CV</strong><br>" +
+               "• Mes <strong>tarifs</strong> et ma <strong>localisation</strong><br><br>" +
+               "Pour toute demande spécifique, cliquez directement sur l'icône WhatsApp pour me joindre en direct au <strong>+243 995 372 992</strong> !";
     }
 }
