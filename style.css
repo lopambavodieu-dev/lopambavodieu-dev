@@ -22,6 +22,142 @@ body {
     overflow-x: hidden;
 }
 
+/* --- ÉCRAN DE CHARGEMENT (PRELOADER) --- */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-dark);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.preloader-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Container du Ninja et de l'épée */
+.ninja-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ninja-icon {
+    font-size: 5rem;
+    color: var(--text-white);
+    animation: ninjaJump 1s ease-in-out infinite alternate;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Épée stylisée en CSS pur */
+.sword {
+    position: absolute;
+    width: 6px;
+    height: 55px;
+    background: linear-gradient(to top, #94a3b8, #f1f5f9);
+    border-radius: 3px;
+    top: 30px;
+    right: 25px;
+    transform-origin: bottom center;
+    z-index: 3;
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.7);
+    animation: swordSlash 0.5s ease-in-out infinite alternate;
+}
+
+/* Garde de l'épée */
+.sword::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: -7px;
+    width: 20px;
+    height: 4px;
+    background: #475569;
+    border-radius: 2px;
+}
+
+/* Poignée de l'épée */
+.sword::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 1px;
+    width: 4px;
+    height: 15px;
+    background: #0f172a;
+    border-radius: 1px;
+}
+
+/* Animations de mouvement du Ninja et de l'épée */
+@keyframes ninjaJump {
+    0% {
+        transform: translateY(12px) scaleY(0.95);
+    }
+    100% {
+        transform: translateY(-15px) scaleY(1);
+    }
+}
+
+@keyframes swordSlash {
+    0% {
+        transform: rotate(25deg) translate(-5px, 0);
+    }
+    100% {
+        transform: rotate(-115deg) translate(5px, -5px);
+    }
+}
+
+/* Barre de progression de chargement */
+.loading-bar-wrapper {
+    width: 280px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.1);
+}
+
+.loading-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--neon-green));
+    border-radius: 4px;
+    box-shadow: 0 0 12px var(--primary-color);
+    transition: width 0.05s linear;
+}
+
+.loading-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+}
+
 /* --- ANIMATION D'ENTRÉE (SCROLL REVEAL) --- */
 .reveal {
     opacity: 0;
@@ -473,6 +609,43 @@ nav {
     line-height: 1.6;
 }
 
+/* Section Avantages dans les cartes de service */
+.service-benefits {
+    margin-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 15px;
+    text-align: left;
+}
+
+.service-benefits h4 {
+    font-size: 0.95rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.service-benefits ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.service-benefits li {
+    font-size: 0.85rem;
+    color: #cbd5e1;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    position: relative;
+    padding-left: 18px;
+}
+
+.service-benefits li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--neon-green);
+    font-weight: bold;
+}
+
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
@@ -581,6 +754,65 @@ nav {
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 600;
+}
+
+/* --- SECTION DEFILANTE DES REALISATIONS (MARQUEE GALLERY) --- */
+.gallery-section {
+    padding: 80px 0;
+    background: #0f172a;
+    overflow: hidden;
+}
+
+.marquee-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 25px 0;
+    display: flex;
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 20px;
+    animation: marqueeScroll 35s linear infinite;
+}
+
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+
+.marquee-item {
+    flex-shrink: 0;
+    width: 320px;
+    height: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.marquee-item:hover {
+    transform: translateY(-6px);
+    border-color: var(--primary-color);
+    box-shadow: 0 15px 25px rgba(0, 212, 255, 0.15);
+}
+
+.marquee-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+@keyframes marqueeScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 /* --- SECTION TÉMOIGNAGES --- */
@@ -1036,7 +1268,7 @@ footer {
         font-size: 0.55rem;
     }
 
-    .about-section, .why-choose-me, .stats-section, .portfolio-section, .testimonials-section, .contact-section {
+    .about-section, .why-choose-me, .stats-section, .portfolio-section, .testimonials-section, .contact-section, .gallery-section {
         padding: 60px 5%;
     }
 
@@ -1067,6 +1299,11 @@ footer {
 
     .slogan-banner p {
         font-size: 1.3rem;
+    }
+
+    .marquee-item {
+        width: 260px;
+        height: 180px;
     }
 }
 
