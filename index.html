@@ -9,6 +9,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Écran de chargement personnalisé (Preloader Ninja) -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="ninja-container">
+                <i class="fa-solid fa-user-ninja ninja-icon"></i>
+                <div class="sword"></div>
+            </div>
+            <div class="loading-bar-wrapper">
+                <div class="loading-bar"></div>
+            </div>
+            <div class="loading-text">Chargement... <span id="loading-pct">0%</span></div>
+        </div>
+    </div>
+
     <header>
         <nav>
             <div class="logo">Lopamba<span>Vodieu</span></div>
@@ -40,11 +54,11 @@
         
         <div class="hero-content reveal">
             <h1>Lopamba <span class="highlight">Vodieu Vodieu</span></h1>
-            <p>Développeur Web & Mobile | Designer Graphique | Community Manager | Marketing Digital</p>
+            <p>Développeur Web | Designer Graphique | Community Manager | Marketing Digital</p>
             <div class="hero-btns">
                 <a href="#about" class="btn">Découvrir mon profil</a>
-                <a href="#" class="btn btn-secondary" download><i class="fa-solid fa-file-pdf"></i> Télécharger mon CV</a>
-                <a href="https://github.com/lopambavodieu-dev/ " target="_blank" class="btn btn-outline"><i class="fa-brands fa-github"></i> Voir mon GitHub</a>
+                <a href="#" class="btn btn-secondary" id="cv-download-btn" download><i class="fa-solid fa-file-pdf"></i> Télécharger mon CV</a>
+                <a href="https://github.com" target="_blank" class="btn btn-outline"><i class="fa-brands fa-github"></i> Voir mon GitHub</a>
             </div>
         </div>
     </section>
@@ -128,7 +142,7 @@
                 <p>Projets Réalisés</p>
             </div>
             <div class="stat-item">
-                <h3 class="stat-number" data-target="5">0</h3>
+                <h3 class="stat-number" data-target="6">0</h3>
                 <p>Domaines Maîtrisés</p>
             </div>
             <div class="stat-item">
@@ -140,44 +154,85 @@
 
     <!-- Section Services Détaillés -->
     <section id="services" class="reveal">
-        <h2 class="section-title">Mes Services & Expertises</h2>
+        <h2 class="section-title">Mes Services & Avantages Clients</h2>
         <div class="services-container">
             <div class="service-card">
                 <div class="card-icon"><i class="fa-solid fa-code"></i></div>
                 <h3>Création de sites web</h3>
                 <p>Conception de sites vitrines et applications web sur mesure, rapides, fluides et optimisés pour tous types d'écrans (Responsive Design).</p>
+                <div class="service-benefits">
+                    <h4>Avantages pour votre business :</h4>
+                    <ul>
+                        <li><strong>Visibilité 24h/24 :</strong> Votre vitrine reste accessible partout dans le monde, à n'importe quel moment.</li>
+                        <li><strong>Crédibilité :</strong> Un site web moderne instaure une confiance immédiate auprès de vos prospects.</li>
+                        <li><strong>Génération de leads :</strong> Automatisez l'acquisition de contacts et convertissez vos visiteurs en acheteurs.</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="service-card">
                 <div class="card-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
                 <h3>Développement Mobile</h3>
                 <p>Création d'applications mobiles multiplateformes performantes pour Android et iOS en utilisant le framework <strong>Flutter & Dart</strong>.</p>
-            </div>
-
-            <div class="service-card">
-                <div class="card-icon"><i class="fa-solid fa-palette"></i></div>
-                <h3>Création de Logos & Branding</h3>
-                <p>Conception d'identités visuelles uniques, logos professionnels 2D/3D et chartes graphiques pour sublimer votre marque.</p>
-            </div>
-
-            <div class="service-card">
-                <div class="card-icon"><i class="fa-solid fa-bullhorn"></i></div>
-                <h3>Marketing & Publicité</h3>
-                <p>Déploiement de stratégies publicitaires performantes sur Facebook, Instagram et Google pour maximiser vos leads et ventes.</p>
+                <div class="service-benefits">
+                    <h4>Avantages pour votre business :</h4>
+                    <ul>
+                        <li><strong>Proximité directe :</strong> Installez votre marque directement dans la poche de vos utilisateurs.</li>
+                        <li><strong>Fidélisation active :</strong> Utilisez les notifications push pour maintenir l'engagement en temps réel.</li>
+                        <li><strong>Expérience optimale :</strong> Offrez un parcours d'utilisation fluide et adapté aux spécificités mobiles.</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="service-card">
                 <div class="card-icon"><i class="fa-solid fa-users-gear"></i></div>
                 <h3>Community Management</h3>
                 <p>Animation, modération de vos réseaux sociaux et création de calendriers éditoriaux pour fidéliser votre communauté au quotidien.</p>
+                <div class="service-benefits">
+                    <h4>Avantages pour votre business :</h4>
+                    <ul>
+                        <li><strong>Gain de temps précieux :</strong> Déléguez l'animation quotidienne pour vous concentrer sur votre métier.</li>
+                        <li><strong>E-réputation maîtrisée :</strong> Construisez et veillez sur une image de marque positive et professionnelle.</li>
+                        <li><strong>Acquisition organique :</strong> Attirez une clientèle qualifiée grâce à des interactions régulières et naturelles.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-icon"><i class="fa-solid fa-palette"></i></div>
+                <h3>Identité Visuelle & Branding</h3>
+                <p>Conception d'identités visuelles uniques, logos professionnels 2D/3D et chartes graphiques pour sublimer votre marque.</p>
+                <div class="service-benefits">
+                    <h4>Avantages pour votre business :</h4>
+                    <ul>
+                        <li><strong>Reconnaissance immédiate :</strong> Démarquez-vous de la concurrence grâce à une identité marquante.</li>
+                        <li><strong>Professionnalisme :</strong> Valorisez vos offres en projetant une image soignée et cohérente.</li>
+                        <li><strong>Confiance renforcée :</strong> Alignez vos valeurs visuelles avec la qualité réelle de vos services.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-icon"><i class="fa-solid fa-images"></i></div>
+                <h3>Affiches & Conception Visuelle</h3>
+                <p>Création de supports de communication physiques ou numériques percutants (affiches, bannières publicitaires, mockups).</p>
+                <div class="service-benefits">
+                    <h4>Avantages pour votre business :</h4>
+                    <ul>
+                        <li><strong>Impact visuel fort :</strong> Captez immédiatement l'attention de votre cible lors d'événements ou en ligne.</li>
+                        <li><strong>Messages clarifiés :</strong> Transmettez des messages promotionnels ou informatifs en un coup d'œil.</li>
+                        <li><strong>Augmentation des ventes :</strong> Incitez à l'action grâce à un design graphique persuasif et accrocheur.</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
         <div class="skills-grid reveal">
-            <span class="skill-badge"><i class="fa-brands fa-python"></i> Python </span>
+            <span class="skill-badge"><i class="fa-brands fa-python"></i> Python / Tkinter</span>
             <span class="skill-badge"><i class="fa-solid fa-mobile-screen-button"></i> Flutter / Dart</span>
             <span class="skill-badge"><i class="fa-solid fa-database"></i> SQLite</span>
             <span class="skill-badge"><i class="fa-solid fa-code"></i> HTML / CSS / JS</span>
+            <span class="skill-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Prompt Engineering</span>
             <span class="skill-badge"><i class="fa-solid fa-bezier-curve"></i> Design Graphique</span>
             <span class="skill-badge"><i class="fa-solid fa-bullhorn"></i> Marketing Digital</span>
             <span class="skill-badge"><i class="fa-solid fa-stroopwafel"></i> Pâtisserie (Gaufres)</span>
@@ -191,7 +246,7 @@
         <p class="section-subtitle">Découvrez un aperçu concret de mes derniers travaux techniques et visuels</p>
         <div class="portfolio-grid">
             <div class="portfolio-card">
-                <div class="portfolio-img-placeholder"><i class="fa-solid fa-laptop-code"></i></div>
+                <div class="portfolio-img-placeholder" style="height: 200px; display: flex; align-items: center; justify-content: center; background: #1e293b; font-size: 3rem; color: var(--primary-color);"><i class="fa-solid fa-laptop-code"></i></div>
                 <div class="portfolio-info">
                     <h3>Gestion de Cours</h3>
                     <p>Logiciel de gestion scolaire intuitif construit avec Python (Tkinter) connecté à une base SQLite.</p>
@@ -200,16 +255,16 @@
             </div>
 
             <div class="portfolio-card">
-                <div class="portfolio-img-placeholder"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <div class="portfolio-img-placeholder" style="height: 200px; display: flex; align-items: center; justify-content: center; background: #1e293b; font-size: 3rem; color: var(--primary-color);"><i class="fa-solid fa-mobile-screen-button"></i></div>
                 <div class="portfolio-info">
                     <h3>App Mobile Flutter</h3>
-                    <p>Développement d'une application de reservation .</p>
+                    <p>Développement d'une application de services mobile avec transition de pages moderne et API.</p>
                     <span class="portfolio-tag">Flutter & Dart</span>
                 </div>
             </div>
 
             <div class="portfolio-card">
-                <div class="portfolio-img-placeholder"><i class="fa-solid fa-compass-drafting"></i></div>
+                <div class="portfolio-img-placeholder" style="height: 200px; display: flex; align-items: center; justify-content: center; background: #1e293b; font-size: 3rem; color: var(--primary-color);"><i class="fa-solid fa-compass-drafting"></i></div>
                 <div class="portfolio-info">
                     <h3>Branding Voldigood</h3>
                     <p>Identité de marque complète, création de maquettes professionnelles et d'un logo 3D unique.</p>
@@ -218,12 +273,48 @@
             </div>
 
             <div class="portfolio-card">
-                <div class="portfolio-img-placeholder"><i class="fa-solid fa-globe"></i></div>
+                <div class="portfolio-img-placeholder" style="height: 200px; display: flex; align-items: center; justify-content: center; background: #1e293b; font-size: 3rem; color: var(--primary-color);"><i class="fa-solid fa-globe"></i></div>
                 <div class="portfolio-info">
                     <h3>Portfolio Personnel</h3>
                     <p>Développement de cette plateforme vitrine intégrant du code dynamique, du CSS premium et du JavaScript fluide.</p>
                     <span class="portfolio-tag">Web (HTML/CSS/JS)</span>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Galerie d'Images Défilantes (Marquee) -->
+    <section class="gallery-section reveal">
+        <h2 class="section-title">Quelques images de mes réalisations</h2>
+        <div class="marquee-wrapper">
+            <div class="marquee-track">
+                <!-- Ensemble des 12 images originales -->
+                <div class="marquee-item"><img src="app.jpg" alt="Réalisation 1"></div>
+                <div class="marquee-item"><img src="PORTO1.jpg" alt="Réalisation 2"></div>
+                <div class="marquee-item"><img src="PORTO2.jpg" alt="Réalisation 3"></div>
+                <div class="marquee-item"><img src="affiche1.jpg" alt="Réalisation 4"></div>
+                <div class="marquee-item"><img src="affiche2.jpg" alt="Réalisation 5"></div>
+                <div class="marquee-item"><img src="affiche3.jpg" alt="Réalisation 6"></div>
+                <div class="marquee-item"><img src="affiche4.jpg" alt="Réalisation 7"></div>
+                <div class="marquee-item"><img src="affiche6.jpg" alt="Réalisation 8"></div>
+                <div class="marquee-item"><img src="affiche5.jpg" alt="Réalisation 9"></div>
+                <div class="marquee-item"><img src="affiche7.jpg" alt="Réalisation 10"></div>
+                <div class="marquee-item"><img src="affiche8.jpg" alt="Réalisation 11"></div>
+                <div class="marquee-item"><img src="affiche9.jpg" alt="Réalisation 12"></div>
+                
+                <!-- Doublon des 12 images pour assurer la continuité du défilement infini -->
+                <div class="marquee-item"><img src="app.jpg" alt="Réalisation 1"></div>
+                <div class="marquee-item"><img src="PORTO1.jpg" alt="Réalisation 2"></div>
+                <div class="marquee-item"><img src="PORTO2.jpg" alt="Réalisation 3"></div>
+                <div class="marquee-item"><img src="affiche1.jpg" alt="Réalisation 4"></div>
+                <div class="marquee-item"><img src="affiche2.jpg" alt="Réalisation 5"></div>
+                <div class="marquee-item"><img src="affiche3.jpg" alt="Réalisation 6"></div>
+                <div class="marquee-item"><img src="affiche4.jpg" alt="Réalisation 7"></div>
+                <div class="marquee-item"><img src="affiche6.jpg" alt="Réalisation 8"></div>
+                <div class="marquee-item"><img src="affiche5.jpg" alt="Réalisation 9"></div>
+                <div class="marquee-item"><img src="affiche7.jpg" alt="Réalisation 10"></div>
+                <div class="marquee-item"><img src="affiche8.jpg" alt="Réalisation 11"></div>
+                <div class="marquee-item"><img src="affiche9.jpg" alt="Réalisation 12"></div>
             </div>
         </div>
     </section>
@@ -251,7 +342,7 @@
 
     <!-- Bannière Slogan -->
     <div class="slogan-banner reveal">
-        <p>"Vous satisfaire c'est ma première priorité 👌"</p>
+        <p>"Vous satisfaire c'est notre première priorité 👌"</p>
     </div>
 
     <!-- Section Contact -->
@@ -276,7 +367,7 @@
         </div>
     </section>
 
-    <!-- Agent IA Chatbot : Lopamba IA -->
+    <!-- Agent IA Chatbot : Lopamba AI -->
     <div id="chat-widget" class="chat-widget">
         <!-- Bouton d'activation -->
         <button id="chat-launcher" class="chat-launcher" title="Discuter avec Lopamba IA">
@@ -301,7 +392,7 @@
             <div id="chat-messages" class="chat-messages">
                 <div class="chat-message bot">
                     Bonjour ! Je suis <strong>Lopamba IA</strong>, l'assistant virtuel de Lopamba. 🤖<br><br>
-                    Comment puis-je vous guider ? Vous pouvez me poser des questions sur mes compétences techniques, mes services, mes projets ou sur la façon de me contacter.
+                    Comment puis-je vous aider aujourd'hui ? Posez-moi des questions sur mes compétences (développement, design, prompt engineering), mes projets, ma localisation, mes tarifs, mon CV ou demandez-moi les avantages de mes services !
                 </div>
             </div>
             
